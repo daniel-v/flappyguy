@@ -1,7 +1,7 @@
 
 /**
  * Div that is considered the game area
- * @type {HTMLElement}
+ * @type {jQuery}
  */
 var playGround;
 /**
@@ -13,7 +13,7 @@ var playGroundHeight;
 /**
  * The background that is being scrolled horizontally for a feel
  * of movement
- * @type {HTMLElement}
+ * @type {jQuery}
  */
 var background;
 /**
@@ -26,7 +26,7 @@ var backgroundLeft = 0;
 /**
  * DOM element that represents the head/flappy thing that has to
  * get through the obstacles
- * @type {HTMLElement}
+ * @type {jQuery}
  */
 var flappyGuyElement;
 /**
@@ -74,7 +74,7 @@ function update() {
             flappyGuyTopPos = flappyGuyMaxTop;
             clearInterval(interval);
             console.error("YOU DIED!");
-            $('.dead').toggleClass('hide', false);
+            $(".dead").toggleClass("hide", false);
         }
         if(flappyGuyTopPos < flappyGuyMinTop) {
             flappyGuyTopPos = flappyGuyMinTop;
@@ -110,7 +110,7 @@ $(function() {
         flappyGuyTopPos = flappyGuyElement.offset().top;
         playGroundHeight = playGround.height();
         flappyGuyMaxTop = playGroundHeight - 32;
-        background = $('.background');
+        background = $(".background");
 
         console.group("Init");
         console.log("Element:", flappyGuyElement);
