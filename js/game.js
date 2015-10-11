@@ -1,3 +1,4 @@
+"use strict";
 
 /**
  * Div that is considered the game area
@@ -23,30 +24,6 @@ var background;
  * @type {number}
  */
 var backgroundLeft = 0;
-/**
- * DOM element that represents the head/flappy thing that has to
- * get through the obstacles
- * @type {jQuery}
- */
-var flappyGuyElement;
-/**
- * Top position of the head
- * @see {@link flappyGuyElement}
- * @type {number}
- */
-var flappyGuyTopPos;
-/**
- * Maximum top value {@link flappyGuyElement} can take
- * @see {@link flappyGuyMinTop}
- * @type {number}
- */
-var flappyGuyMaxTop;
-/**
- * Minimum top value {@link flappyGuyElement} can take
- * @see {@link flappyGuyMaxTop}
- * @type {number}
- */
-var flappyGuyMinTop = 0;
 
 /**
  * Variable to indicate if the update loop should increase height
@@ -60,26 +37,18 @@ var flapOne = false;
 var interval;
 
 /**
+ * Flappy guy insteance
+ * @type {FlappyGuy}
+ */
+var flappyGuy;
+
+/**
  * Update function that is called every 25ms
  */
 function update() {
     function updateFlappyPos() {
-        if(flapOne) {
-            flappyGuyTopPos -= 40;
-            flapOne = false;
-        } else {
-            flappyGuyTopPos += 4;
-        }
-        if(flappyGuyTopPos > flappyGuyMaxTop) {
-            flappyGuyTopPos = flappyGuyMaxTop;
-            clearInterval(interval);
-            console.error("YOU DIED!");
-            $(".dead").toggleClass("hide", false);
-        }
-        if(flappyGuyTopPos < flappyGuyMinTop) {
-            flappyGuyTopPos = flappyGuyMinTop;
-        }
-        flappyGuyElement.css("top", flappyGuyTopPos + "px");
+        flappyGuy.update(flapOne);
+        flapOne = false;
     }
 
     function stepBackground() {
@@ -89,6 +58,15 @@ function update() {
 
     updateFlappyPos();
     stepBackground();
+}
+
+/**
+ * What to do in case player dies
+ */
+function death() {
+    clearInterval(interval);
+    $(".dead").toggleClass("hide", false);
+    console.error("YOU DIED!");
 }
 
 $(function() {
@@ -106,16 +84,15 @@ $(function() {
      */
     function initGameVariables() {
         playGround = $(".play-ground");
-        flappyGuyElement = $(".flappy");
-        flappyGuyTopPos = flappyGuyElement.offset().top;
         playGroundHeight = playGround.height();
-        flappyGuyMaxTop = playGroundHeight - 32;
         background = $(".background");
 
+        flappyGuy = new FlappyGuy(".flappy", playGroundHeight - 32, death);
+
         console.group("Init");
-        console.log("Element:", flappyGuyElement);
-        console.log("Top:", flappyGuyTopPos);
-        console.log("Max top:", flappyGuyMaxTop);
+        console.log("Element:", flappyGuy.element);
+        console.log("Top:", flappyGuy.currentTop);
+        console.log("Max top:", flappyGuy.maxTop);
         console.groupEnd();
     }
 
