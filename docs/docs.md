@@ -1,3 +1,8 @@
+## Classes
+<dl>
+<dt><a href="#FlappyGuy">FlappyGuy</a></dt>
+<dd></dd>
+</dl>
 ## Members
 <dl>
 <dt><a href="#playGround">playGround</a> : <code>jQuery</code></dt>
@@ -13,19 +18,6 @@ of movement</p>
 <dt><a href="#backgroundLeft">backgroundLeft</a> : <code>number</code></dt>
 <dd><p>The left position of the background</p>
 </dd>
-<dt><a href="#flappyGuyElement">flappyGuyElement</a> : <code>jQuery</code></dt>
-<dd><p>DOM element that represents the head/flappy thing that has to
-get through the obstacles</p>
-</dd>
-<dt><a href="#flappyGuyTopPos">flappyGuyTopPos</a> : <code>number</code></dt>
-<dd><p>Top position of the head</p>
-</dd>
-<dt><a href="#flappyGuyMaxTop">flappyGuyMaxTop</a> : <code>number</code></dt>
-<dd><p>Maximum top value <a href="#flappyGuyElement">flappyGuyElement</a> can take</p>
-</dd>
-<dt><a href="#flappyGuyMinTop">flappyGuyMinTop</a> : <code>number</code></dt>
-<dd><p>Minimum top value <a href="#flappyGuyElement">flappyGuyElement</a> can take</p>
-</dd>
 <dt><a href="#flapOne">flapOne</a> : <code>boolean</code></dt>
 <dd><p>Variable to indicate if the update loop should increase height
 instead of decrease it</p>
@@ -33,13 +25,66 @@ instead of decrease it</p>
 <dt><a href="#interval">interval</a></dt>
 <dd><p>Interval ID for gameloop</p>
 </dd>
+<dt><a href="#flappyGuy">flappyGuy</a> : <code><a href="#FlappyGuy">FlappyGuy</a></code></dt>
+<dd><p>Flappy guy insteance</p>
+</dd>
 </dl>
 ## Functions
 <dl>
 <dt><a href="#update">update()</a></dt>
 <dd><p>Update function that is called every 25ms</p>
 </dd>
+<dt><a href="#death">death()</a></dt>
+<dd><p>What to do in case player dies</p>
+</dd>
 </dl>
+<a name="FlappyGuy"></a>
+## FlappyGuy
+**Kind**: global class  
+
+* [FlappyGuy](#FlappyGuy)
+  * [new FlappyGuy(elementSelector, maxTop, deathCallback)](#new_FlappyGuy_new)
+  * [.element](#FlappyGuy+element) ⇒ <code>jQuery</code>
+  * [.maxTop](#FlappyGuy+maxTop) ⇒ <code>number</code>
+  * [.currentTop](#FlappyGuy+currentTop) ⇒ <code>number</code>
+  * [.update(flapOne)](#FlappyGuy+update)
+
+<a name="new_FlappyGuy_new"></a>
+### new FlappyGuy(elementSelector, maxTop, deathCallback)
+Create a new FlappyGuy instance
+
+
+| Param | Type |
+| --- | --- |
+| elementSelector | <code>string</code> | 
+| maxTop | <code>number</code> | 
+| deathCallback | <code>function</code> | 
+
+<a name="FlappyGuy+element"></a>
+### flappyGuy.element ⇒ <code>jQuery</code>
+Get the element jQuery object wrapped element of this insteance
+
+**Kind**: instance property of <code>[FlappyGuy](#FlappyGuy)</code>  
+<a name="FlappyGuy+maxTop"></a>
+### flappyGuy.maxTop ⇒ <code>number</code>
+Maximum top position
+
+**Kind**: instance property of <code>[FlappyGuy](#FlappyGuy)</code>  
+<a name="FlappyGuy+currentTop"></a>
+### flappyGuy.currentTop ⇒ <code>number</code>
+Current top position
+
+**Kind**: instance property of <code>[FlappyGuy](#FlappyGuy)</code>  
+<a name="FlappyGuy+update"></a>
+### flappyGuy.update(flapOne)
+Update this object in the game loop
+
+**Kind**: instance method of <code>[FlappyGuy](#FlappyGuy)</code>  
+
+| Param | Type |
+| --- | --- |
+| flapOne | <code>boolean</code> | 
+
 <a name="playGround"></a>
 ## playGround : <code>jQuery</code>
 Div that is considered the game area
@@ -64,30 +109,6 @@ The left position of the background
 **Kind**: global variable  
 **Default**: <code>0</code>  
 **See**: [background](#background)  
-<a name="flappyGuyElement"></a>
-## flappyGuyElement : <code>jQuery</code>
-DOM element that represents the head/flappy thing that has to
-get through the obstacles
-
-**Kind**: global variable  
-<a name="flappyGuyTopPos"></a>
-## flappyGuyTopPos : <code>number</code>
-Top position of the head
-
-**Kind**: global variable  
-**See**: [flappyGuyElement](#flappyGuyElement)  
-<a name="flappyGuyMaxTop"></a>
-## flappyGuyMaxTop : <code>number</code>
-Maximum top value [flappyGuyElement](#flappyGuyElement) can take
-
-**Kind**: global variable  
-**See**: [flappyGuyMinTop](#flappyGuyMinTop)  
-<a name="flappyGuyMinTop"></a>
-## flappyGuyMinTop : <code>number</code>
-Minimum top value [flappyGuyElement](#flappyGuyElement) can take
-
-**Kind**: global variable  
-**See**: [flappyGuyMaxTop](#flappyGuyMaxTop)  
 <a name="flapOne"></a>
 ## flapOne : <code>boolean</code>
 Variable to indicate if the update loop should increase height
@@ -99,8 +120,18 @@ instead of decrease it
 Interval ID for gameloop
 
 **Kind**: global variable  
+<a name="flappyGuy"></a>
+## flappyGuy : <code>[FlappyGuy](#FlappyGuy)</code>
+Flappy guy insteance
+
+**Kind**: global variable  
 <a name="update"></a>
 ## update()
 Update function that is called every 25ms
+
+**Kind**: global function  
+<a name="death"></a>
+## death()
+What to do in case player dies
 
 **Kind**: global function  
